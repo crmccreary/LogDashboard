@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script type=text/javascript>
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='fullcalendar/fullcalendar.css') }}"/>
+<link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='fullcalendar/fullcalendar.print.css') }}" media='print' />
+<script type='text/javascript' src="{{ url_for('static', filename='jquery/jquery-1.7.min.js') }}"></script>
+<script type='text/javascript' src="{{ url_for('static', filename='jquery/jquery-ui-1.8.16.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ url_for('static', filename='fullcalendar/fullcalendar.js') }}"></script>
+<script type='text/javascript'>
+
+	$(document).ready(function() {
+	
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,basicWeek,basicDay'
+			},
+			editable: true,
+                        eventSources: [
+                            {
+                                url: '/events', // use the `url` property
+                                color: 'yellow',    // an option!
+                                textColor: 'black'  // an option!
+                            }
+
+                        ],
+                        //eventClick: function(event) {
+                        //    if (event.url) {
+                        //        window.open(event.url);
+                        //        return false;
+                        //    }
+                        //}
+		});
+		
+	});
+
+</script>
+<style type='text/css'>
+
+	body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		}
+
+	#calendar {
+		width: 900px;
+		margin: 0 auto;
+		}
+
+</style>
+</head>
+<body>
+<div id='calendar'></div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=entries>
+  <li>
+  <h2>{{ event.context.description }}</h2>
+  <h3>stdout</h3>
+  {% autoescape false %}
+  {{ event.extra.stdout|nl2br }}
+  {% endautoescape %}
+  <h3>stderr</h3>
+  {% autoescape false %}
+  {{ event.extra.stderr|nl2br }}
+  {% endautoescape %}
+  </li>
+  </ul>
+{% endblock %}
